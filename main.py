@@ -20,31 +20,30 @@ button3.pack(side=tk.LEFT)
 button4 = tk.Button(master=frame, text="Quit", height=5, width=15)
 button4.pack(side=tk.LEFT)
 
-def handle_clickGym(event):
-  global button1, button2, button3, button4, buttonState, lastState, activepkm
-  buttonState="GymFight"
-  lastState="GymFight"
+
+
+def activepokemon():
+  global activepkm
   frame = tk.Frame(window)
   frame.pack()
   frame.place(anchor='center', relx=0.18, rely=0.62)
-
-  # Create an object of tkinter ImageTk
   img2=Image.open("25.png")
   img = ImageTk.PhotoImage(img2.resize((100,100), Image.Resampling.LANCZOS))
-
-  # Create a Label Widget to display the text or Image
   activepkm = tk.Label(frame, image = img)
   activepkm.pack()
-  
-  
+  buttonListner()
+
+def handle_clickGym(event):
+  global button1, button2, button3, button4, buttonState, lastState, activepkm
+  buttonState="GymFight" 
   button1["text"]="Fight"
   button2["text"]="Potion"
   button3["text"]="Run"
   button4["text"]=""
-  buttonListner()
+  activepokemon()
 
 def handle_clickRun(event):
-  global button1, button2, button3, button4, buttonState
+  global button1, button2, button3, button4, buttonState, activepkm
   activepkm.after(1,activepkm.destroy)
   buttonState="Outside"
   button1["text"]="Gym 1"
@@ -60,7 +59,7 @@ def handle_clickWild(event):
   button2["text"]="Catch"
   button3["text"]="Run"
   button4["text"]=""
-  buttonListner()
+  activepokemon()
 def handle_clickFight(event):
   global button1, button2, button3, button4, buttonState, lastState
   buttonState="Fight"
